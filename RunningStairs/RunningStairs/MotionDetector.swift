@@ -12,9 +12,8 @@ import CoreMotion
 
 protocol MotionDetectorProtocol {
     func updateActivityType(activityType : String)
-    func updateStairsCount(count : String)
-    func updateAltitude(altitude : String?)
-    func updateAccelerationZ(accelerationZ : String)
+    func updatePace(pace : String)
+    func updateAltitude(altitude : Double)
     func updateFloorsUp(floorsUp : String)
     func updateFloorsDown(floorsDown : String)
 }
@@ -26,8 +25,8 @@ class MotionDetector {
     private let pedometer = CMPedometer()
     private let motionManager = CMMotionManager()
     private var activityType = ""
-    private var stepsCount = ""
-    private var altidude = ""
+    private var pace = ""
+    private var altidude : Double!
     private var accelerationZ = ""
     private var floorsUp = ""
     private var floorsDown = ""
@@ -65,11 +64,14 @@ class MotionDetector {
             
             DispatchQueue.main.async {
             
-                self?.stepsCount = pedometerData.numberOfSteps.stringValue
+                if let pace = pedometerData.currentPace {
+                    self?.pace = pace.stringValue
+                }
+                
                 self?.floorsUp = (pedometerData.floorsAscended?.stringValue)!
                 self?.floorsDown = (pedometerData.floorsDescended?.stringValue)!
                 
-                self?.delegate.updateStairsCount(count: (self?.stepsCount)!)
+                self?.delegate.updatePace(pace: (self?.pace)!)
                 self?.delegate.updateFloorsDown(floorsDown: (self?.floorsDown)!)
                 self?.delegate.updateFloorsUp(floorsUp: (self?.floorsUp)!)
             }
@@ -81,35 +83,14 @@ class MotionDetector {
                 [weak self] altitudeData, error in
                 guard let altitudeData = altitudeData, error == nil else { return }
                 
-                self?.altidude = altitudeData.relativeAltitude.stringValue
+                guard let altitude = altitudeData.relativeAltitude as? Double else { return }
+                
+                self?.altidude = altitude
             
-                self?.delegate.updateAltitude(altitude: self?.altidude)
+                self?.delegate.updateAltitude(altitude: (self?.altidude)!)
                 } )
     }
     
-    private func startTrackingAcceleration() {
-        
-        motionManager.startDeviceMotionUpdates(to: OperationQueue()) { deviceMotion, error in
-            
-            guard let deviceMotion = deviceMotion, error == nil else  { return }
-            
-            self.accelerationZ = String(deviceMotion.userAcceleration.z)
-            self.delegate.updateAccelerationZ(accelerationZ: self.accelerationZ)
-            
-        }
-        /*motionManager.startAccelerometerUpdates(to: OperationQueue.current!){
-            (data , error) in
-            
-            guard let data = data, error == nil else  { return }
-                self.accelerationZ = String(data.acceleration.z)
-                print("X + \(data.acceleration.x)")
-                print("Y + \(data.acceleration.y)")
-                print("Z + \(data.acceleration.z)")
-                self.delegate.updateAccelerationZ(accelerationZ: self.accelerationZ)
-            
-        }*/
-    }
- 
     
     
     
@@ -124,10 +105,6 @@ class MotionDetector {
         
          if CMAltimeter.isRelativeAltitudeAvailable() {
             startTrackingAltitude()
-        }
-        
-        if motionManager.isAccelerometerAvailable {
-            startTrackingAcceleration()
         }
         
     }

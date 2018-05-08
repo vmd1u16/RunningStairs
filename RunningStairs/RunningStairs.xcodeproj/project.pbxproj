@@ -15,6 +15,7 @@
 		F51A941E20A0605F00F75D8A /* RunningStairsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A941D20A0605F00F75D8A /* RunningStairsTests.swift */; };
 		F51A942920A0605F00F75D8A /* RunningStairsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A942820A0605F00F75D8A /* RunningStairsUITests.swift */; };
 		F51A943720A0661600F75D8A /* MotionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A943620A0661600F75D8A /* MotionDetector.swift */; };
+		F51A943920A1AA5900F75D8A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A943820A1AA5900F75D8A /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F51A942820A0605F00F75D8A /* RunningStairsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStairsUITests.swift; sourceTree = "<group>"; };
 		F51A942A20A0605F00F75D8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F51A943620A0661600F75D8A /* MotionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetector.swift; sourceTree = "<group>"; };
+		F51A943820A1AA5900F75D8A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				F51A940820A0605F00F75D8A /* AppDelegate.swift */,
 				F51A940A20A0605F00F75D8A /* StatisticsViewController.swift */,
 				F51A940C20A0605F00F75D8A /* Main.storyboard */,
+				F51A943820A1AA5900F75D8A /* Helpers.swift */,
 				F51A940F20A0605F00F75D8A /* Assets.xcassets */,
 				F51A941120A0605F00F75D8A /* LaunchScreen.storyboard */,
 				F51A943620A0661600F75D8A /* MotionDetector.swift */,
@@ -265,6 +268,7 @@
 				F51A940B20A0605F00F75D8A /* StatisticsViewController.swift in Sources */,
 				F51A940920A0605F00F75D8A /* AppDelegate.swift in Sources */,
 				F51A943720A0661600F75D8A /* MotionDetector.swift in Sources */,
+				F51A943920A1AA5900F75D8A /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

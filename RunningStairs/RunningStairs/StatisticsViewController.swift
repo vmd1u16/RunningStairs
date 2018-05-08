@@ -13,18 +13,22 @@ class StatisticsViewController: UIViewController, MotionDetectorProtocol {
     
     @IBOutlet weak var activityLabel: UILabel!
     
-    @IBOutlet weak var stairsCounter: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
     
     @IBOutlet weak var altitudeLabel: UILabel!
     
-    @IBOutlet weak var accelerationZLabel: UILabel!
+    @IBOutlet weak var directionLabel: UILabel!
     
     @IBOutlet weak var floorsUpLabel: UILabel!
     
     @IBOutlet weak var floorsDownLabel: UILabel!
-    
-    
+
     let motionDetector = MotionDetector()
+    
+    var canChangeDirection = true
+    
+    var previousAltitude : Double!
+    var currentAltitude : Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +48,46 @@ class StatisticsViewController: UIViewController, MotionDetectorProtocol {
         self.activityLabel.text = activityType
     }
     
-    func updateStairsCount(count: String) {
-        self.stairsCounter.text = count
+    func updatePace(pace: String) {
+        self.paceLabel.text = pace
     }
     
-    func updateAltitude(altitude: String?) {
-        self.altitudeLabel.text = altitude
+    func updateAltitude(altitude: Double) {
+        self.altitudeLabel.text = String(altitude)
+        self.currentAltitude = altitude
+        
+        
+        synchronize(lockObj: canChangeDirection as AnyObject) {
+            // if can change direction == true
+            if canChangeDirection {
+                canChangeDirection = false
+                self.previousAltitude = altitude
+                runCode(in: 5.0) {
+                    
+                    self.setupDirection()
+                    
+                }
+            }
+        }
+        
+      
     }
     
-    func updateAccelerationZ(accelerationZ: String) {
-        self.accelerationZLabel.text = accelerationZ
+    func setupDirection() {
+        
+        // direction is down
+        if self.previousAltitude > self.currentAltitude + 0.5 {
+            self.directionLabel.text = "Down"
+        }
+            
+        // direction is up
+        else if self.previousAltitude < self.currentAltitude - 0.5 {
+            self.directionLabel.text = "Up"
+        }
+        
+        // else don't change direction, leave it as it is because there is not much change in the altitude and you can't know for sure if the user is going up or down
+        
+        self.canChangeDirection = true
     }
     
     func updateFloorsUp(floorsUp: String) {
