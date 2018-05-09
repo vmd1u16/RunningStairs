@@ -1,0 +1,6 @@
+framework module Pods_RunningStairsTests {
+  umbrella header "Pods-RunningStairsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

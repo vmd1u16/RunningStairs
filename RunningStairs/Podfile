@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'RunningStairs' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for RunningStairs
+
+  pod 'MotionDetector', :path => '../MotionDetector'
+
+  target 'RunningStairsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'RunningStairsUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

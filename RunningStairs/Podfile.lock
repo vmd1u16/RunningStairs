@@ -1,0 +1,16 @@
+PODS:
+  - MotionDetector (1.0.0)
+
+DEPENDENCIES:
+  - MotionDetector (from `../MotionDetector`)
+
+EXTERNAL SOURCES:
+  MotionDetector:
+    :path: ../MotionDetector
+
+SPEC CHECKSUMS:
+  MotionDetector: 4583ff682a6c9b99c964e8792fd9fbf1ad54441e
+
+PODFILE CHECKSUM: 329b32f23b84b0f5ae42e6749d6179be4bb6bfc9
+
+COCOAPODS: 1.3.1

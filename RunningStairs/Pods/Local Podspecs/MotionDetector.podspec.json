@@ -1,0 +1,24 @@
+{
+  "name": "MotionDetector",
+  "version": "1.0.0",
+  "summary": "Motion Detector is an SDK that abstracts the raw sensor data.",
+  "description": "Motion Detector provides implementations for 4 different types of activities which can be tracked: Bicep curl counter, Star-Jumps counter, Inside-Outside Pocket, Running Stairs",
+  "homepage": "https://github.com",
+  "license": "MIT",
+  "authors": {
+    "Vlad D": "vmd1u16@soton.ac.uk"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": [
+    "MotionDetector",
+    "MotionDetector/**/*.{h,m,swift}"
+  ],
+  "pod_target_xcconfig": {
+    "SWIFT_VERSION": "3"
+  }
+}

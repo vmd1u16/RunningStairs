@@ -1,0 +1,6 @@
+framework module MotionDetector {
+  umbrella header "MotionDetector-umbrella.h"
+
+  export *
+  module * { export * }
+}

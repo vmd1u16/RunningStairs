@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MotionDetector
 
 class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
 

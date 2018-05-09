@@ -11,7 +11,7 @@ import CoreMotion
 
 
 // protocol for running stairs activity
-protocol RunningStairsProtocol {
+public protocol RunningStairsProtocol {
     func updateActivityType(activityType : String)
     func updatePace(pace : Double)
     func updateAveragePace(pace : Double)
@@ -21,32 +21,36 @@ protocol RunningStairsProtocol {
 
 
 // protocol for bicep curl counter activity
-protocol BicepCurlProtocol {
+public protocol BicepCurlProtocol {
     
 }
 
 // protocol for star jumps counter activity
-protocol StarJumpsProtocol {
+public protocol StarJumpsProtocol {
     
 }
 
 // protocol for inside-outside pocket activity
-protocol InsideOutsidePocketProtocol {
+public protocol InsideOutsidePocketProtocol {
     
 }
 
-class MotionDetector {
+public class MotionDetector {
    
     private let activityManager = CMMotionActivityManager()
     private let altimeter = CMAltimeter()
     private let pedometer = CMPedometer()
 
     
-    var runningStairsDelegate : RunningStairsProtocol!
-    var bicepCurlDelegate : BicepCurlProtocol!
-    var starJumpsDelegate : StarJumpsProtocol!
-    var insideOutsidePocketDelegate : InsideOutsidePocketProtocol!
+   public var runningStairsDelegate : RunningStairsProtocol!
+   public var bicepCurlDelegate : BicepCurlProtocol!
+   public var starJumpsDelegate : StarJumpsProtocol!
+   public var insideOutsidePocketDelegate : InsideOutsidePocketProtocol!
     
+    
+   public init() {
+        
+    }
     
     // start and stop methods for running stairs activity
     
