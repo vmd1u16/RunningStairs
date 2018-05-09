@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F51A940920A0605F00F75D8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A940820A0605F00F75D8A /* AppDelegate.swift */; };
-		F51A940B20A0605F00F75D8A /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A940A20A0605F00F75D8A /* StatisticsViewController.swift */; };
 		F51A940E20A0605F00F75D8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F51A940C20A0605F00F75D8A /* Main.storyboard */; };
 		F51A941020A0605F00F75D8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F51A940F20A0605F00F75D8A /* Assets.xcassets */; };
 		F51A941320A0605F00F75D8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F51A941120A0605F00F75D8A /* LaunchScreen.storyboard */; };
@@ -16,6 +15,9 @@
 		F51A942920A0605F00F75D8A /* RunningStairsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A942820A0605F00F75D8A /* RunningStairsUITests.swift */; };
 		F51A943720A0661600F75D8A /* MotionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A943620A0661600F75D8A /* MotionDetector.swift */; };
 		F51A943920A1AA5900F75D8A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51A943820A1AA5900F75D8A /* Helpers.swift */; };
+		F54A08C520A2D8B700831EB1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */; };
+		F54A08C820A2D9F600831EB1 /* FirstTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */; };
+		F54A08CA20A2DA0500831EB1 /* SecondTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 /* Begin PBXFileReference section */
 		F51A940520A0605F00F75D8A /* RunningStairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunningStairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F51A940820A0605F00F75D8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F51A940A20A0605F00F75D8A /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		F51A940D20A0605F00F75D8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F51A940F20A0605F00F75D8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F51A941220A0605F00F75D8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +52,9 @@
 		F51A942A20A0605F00F75D8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F51A943620A0661600F75D8A /* MotionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetector.swift; sourceTree = "<group>"; };
 		F51A943820A1AA5900F75D8A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTrackerViewController.swift; sourceTree = "<group>"; };
+		F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTrackerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				F51A940820A0605F00F75D8A /* AppDelegate.swift */,
-				F51A940A20A0605F00F75D8A /* StatisticsViewController.swift */,
 				F51A940C20A0605F00F75D8A /* Main.storyboard */,
+				F54A08C620A2D8C700831EB1 /* controllers */,
 				F51A943820A1AA5900F75D8A /* Helpers.swift */,
 				F51A940F20A0605F00F75D8A /* Assets.xcassets */,
 				F51A941120A0605F00F75D8A /* LaunchScreen.storyboard */,
@@ -129,6 +133,16 @@
 				F51A942A20A0605F00F75D8A /* Info.plist */,
 			);
 			path = RunningStairsUITests;
+			sourceTree = "<group>";
+		};
+		F54A08C620A2D8C700831EB1 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */,
+				F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */,
+				F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F51A940B20A0605F00F75D8A /* StatisticsViewController.swift in Sources */,
+				F54A08CA20A2DA0500831EB1 /* SecondTrackerViewController.swift in Sources */,
 				F51A940920A0605F00F75D8A /* AppDelegate.swift in Sources */,
+				F54A08C820A2D9F600831EB1 /* FirstTrackerViewController.swift in Sources */,
 				F51A943720A0661600F75D8A /* MotionDetector.swift in Sources */,
+				F54A08C520A2D8B700831EB1 /* TabBarViewController.swift in Sources */,
 				F51A943920A1AA5900F75D8A /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

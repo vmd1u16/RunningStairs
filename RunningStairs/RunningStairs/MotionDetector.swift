@@ -10,12 +10,29 @@ import Foundation
 import CoreMotion
 
 
-protocol MotionDetectorProtocol {
+// protocol for running stairs activity
+protocol RunningStairsProtocol {
     func updateActivityType(activityType : String)
-    func updatePace(pace : String)
+    func updatePace(pace : Double)
+    func updateAveragePace(pace : Double)
     func updateAltitude(altitude : Double)
-    func updateFloorsUp(floorsUp : String)
-    func updateFloorsDown(floorsDown : String)
+    func updateFloors(floors : Int)
+}
+
+
+// protocol for bicep curl counter activity
+protocol BicepCurlProtocol {
+    
+}
+
+// protocol for star jumps counter activity
+protocol StarJumpsProtocol {
+    
+}
+
+// protocol for inside-outside pocket activity
+protocol InsideOutsidePocketProtocol {
+    
 }
 
 class MotionDetector {
@@ -23,16 +40,70 @@ class MotionDetector {
     private let activityManager = CMMotionActivityManager()
     private let altimeter = CMAltimeter()
     private let pedometer = CMPedometer()
-    private let motionManager = CMMotionManager()
-    private var activityType = ""
-    private var pace = ""
-    private var altidude : Double!
-    private var accelerationZ = ""
-    private var floorsUp = ""
-    private var floorsDown = ""
+
+    
+    var runningStairsDelegate : RunningStairsProtocol!
+    var bicepCurlDelegate : BicepCurlProtocol!
+    var starJumpsDelegate : StarJumpsProtocol!
+    var insideOutsidePocketDelegate : InsideOutsidePocketProtocol!
     
     
-    var delegate : MotionDetectorProtocol!
+    // start and stop methods for running stairs activity
+    
+    public func startRunningStairsActivity() {
+        if CMMotionActivityManager.isActivityAvailable() {
+            startTrackingActivityType()
+        }
+        
+        if CMPedometer.isStepCountingAvailable() {
+            startCountingSteps()
+        }
+        
+        if CMAltimeter.isRelativeAltitudeAvailable() {
+            startTrackingAltitude()
+        }
+        
+    }
+    
+    public func stopRunningStairsActivity() {
+        activityManager.stopActivityUpdates()
+        pedometer.stopEventUpdates()
+        pedometer.stopUpdates()
+        altimeter.stopRelativeAltitudeUpdates()
+        
+    }
+    
+     // start and stop methods for bicep curl counter activity
+    
+    public func startBicepCurlActivity() {
+        
+    }
+    
+    public func stopBicepCurlActivity() {
+        
+    }
+    
+    // start and stop methods for star jumps activity
+    
+    public func startStarJumpsActivity() {
+        
+    }
+    
+    public func stopStarJumpsActivity() {
+        
+    }
+   
+    // start and stop methods for inside outside pocket activity
+    
+    public func startInsideOutsidePocketActivity() {
+        
+    }
+    
+    public func stopInsideOutsidePocketActivity() {
+        
+    }
+    
+
     
     private func startTrackingActivityType() {
         activityManager.startActivityUpdates(to: OperationQueue.main) {
@@ -41,17 +112,13 @@ class MotionDetector {
             guard let activity = activity else { return }
             DispatchQueue.main.async {
                 if activity.walking {
-                    self?.activityType = "Walking"
-                    self?.delegate.updateActivityType(activityType: (self?.activityType)!)
+                    self?.runningStairsDelegate.updateActivityType(activityType: "Walking")
                 } else if activity.stationary {
-                    self?.activityType = "Stationary"
-                     self?.delegate.updateActivityType(activityType: (self?.activityType)!)
+                     self?.runningStairsDelegate.updateActivityType(activityType: "Stationary")
                 } else if activity.running {
-                    self?.activityType = "Running"
-                     self?.delegate.updateActivityType(activityType: (self?.activityType)!)
+                     self?.runningStairsDelegate.updateActivityType(activityType: "Running")
                 } else if activity.automotive {
-                    self?.activityType = "Automotive"
-                    self?.delegate.updateActivityType(activityType: (self?.activityType)!)
+                    self?.runningStairsDelegate.updateActivityType(activityType: "Automotive")
                 }
             }
         }
@@ -64,16 +131,25 @@ class MotionDetector {
             
             DispatchQueue.main.async {
             
-                if let pace = pedometerData.currentPace {
-                    self?.pace = pace.stringValue
+                if let pace = pedometerData.currentPace as? Double{
+                     self?.runningStairsDelegate.updatePace(pace: pace)
+                }
+               
+                if let avgPace = pedometerData.averageActivePace as? Double {
+                    self?.runningStairsDelegate.updateAveragePace(pace: avgPace)
                 }
                 
-                self?.floorsUp = (pedometerData.floorsAscended?.stringValue)!
-                self?.floorsDown = (pedometerData.floorsDescended?.stringValue)!
+                var floors = 0 
                 
-                self?.delegate.updatePace(pace: (self?.pace)!)
-                self?.delegate.updateFloorsDown(floorsDown: (self?.floorsDown)!)
-                self?.delegate.updateFloorsUp(floorsUp: (self?.floorsUp)!)
+                if let floorsUp = pedometerData.floorsAscended as? Int{
+                    floors = floorsUp
+                }
+                
+                if let floorsDown = pedometerData.floorsDescended as? Int{
+                    floors = floors + floorsDown
+                }
+                
+                self?.runningStairsDelegate.updateFloors(floors: floors)
             }
         }
     }
@@ -85,28 +161,9 @@ class MotionDetector {
                 
                 guard let altitude = altitudeData.relativeAltitude as? Double else { return }
                 
-                self?.altidude = altitude
             
-                self?.delegate.updateAltitude(altitude: (self?.altidude)!)
-                } )
-    }
-    
-    
-    
-    
-    public func startUpdating() {
-        if CMMotionActivityManager.isActivityAvailable() {
-            startTrackingActivityType()
-        }
-        
-        if CMPedometer.isStepCountingAvailable() {
-            startCountingSteps()
-        }
-        
-         if CMAltimeter.isRelativeAltitudeAvailable() {
-            startTrackingAltitude()
-        }
-        
+                self?.runningStairsDelegate.updateAltitude(altitude: (altitude))
+            } )
     }
     
 }
