@@ -20,6 +20,11 @@
 		F54A08C520A2D8B700831EB1 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */; };
 		F54A08C820A2D9F600831EB1 /* FirstTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */; };
 		F54A08CA20A2DA0500831EB1 /* SecondTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */; };
+		F54A094720A32EC000831EB1 /* RunningStairs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F54A094520A32EC000831EB1 /* RunningStairs.xcdatamodeld */; };
+		F5F68AEB20A3338300E7CA0D /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F68AE920A3338300E7CA0D /* Activity+CoreDataClass.swift */; };
+		F5F68AEC20A3338300E7CA0D /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F68AEA20A3338300E7CA0D /* Activity+CoreDataProperties.swift */; };
+		F5F68AEE20A334EF00E7CA0D /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F68AED20A334EF00E7CA0D /* HistoryTableViewController.swift */; };
+		F5F68AF020A3358900E7CA0D /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F68AEF20A3358900E7CA0D /* ActivityTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +81,11 @@
 		F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTrackerViewController.swift; sourceTree = "<group>"; };
 		F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTrackerViewController.swift; sourceTree = "<group>"; };
+		F54A094620A32EC000831EB1 /* RunningStairs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RunningStairs.xcdatamodel; sourceTree = "<group>"; };
+		F5F68AE920A3338300E7CA0D /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F5F68AEA20A3338300E7CA0D /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F5F68AED20A334EF00E7CA0D /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		F5F68AEF20A3358900E7CA0D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		F6D7B05D51D0F157D2EAE699 /* Pods-RunningStairs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningStairs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RunningStairs/Pods-RunningStairs.debug.xcconfig"; sourceTree = "<group>"; };
 		FD766637ABC24E441D26C62D /* Pods-RunningStairsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningStairsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RunningStairsTests/Pods-RunningStairsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,13 +166,16 @@
 		F51A940720A0605F00F75D8A /* RunningStairs */ = {
 			isa = PBXGroup;
 			children = (
+				F5F68AE820A3303300E7CA0D /* DBModels */,
 				F51A940820A0605F00F75D8A /* AppDelegate.swift */,
 				F51A940C20A0605F00F75D8A /* Main.storyboard */,
 				F54A08C620A2D8C700831EB1 /* controllers */,
+				F5F68AF120A3358D00E7CA0D /* views */,
 				F51A943820A1AA5900F75D8A /* Helpers.swift */,
 				F51A940F20A0605F00F75D8A /* Assets.xcassets */,
 				F51A941120A0605F00F75D8A /* LaunchScreen.storyboard */,
 				F51A941420A0605F00F75D8A /* Info.plist */,
+				F54A094520A32EC000831EB1 /* RunningStairs.xcdatamodeld */,
 			);
 			path = RunningStairs;
 			sourceTree = "<group>";
@@ -191,8 +204,26 @@
 				F54A08C420A2D8B700831EB1 /* TabBarViewController.swift */,
 				F54A08C720A2D9F600831EB1 /* FirstTrackerViewController.swift */,
 				F54A08C920A2DA0500831EB1 /* SecondTrackerViewController.swift */,
+				F5F68AED20A334EF00E7CA0D /* HistoryTableViewController.swift */,
 			);
 			path = controllers;
+			sourceTree = "<group>";
+		};
+		F5F68AE820A3303300E7CA0D /* DBModels */ = {
+			isa = PBXGroup;
+			children = (
+				F5F68AE920A3338300E7CA0D /* Activity+CoreDataClass.swift */,
+				F5F68AEA20A3338300E7CA0D /* Activity+CoreDataProperties.swift */,
+			);
+			path = DBModels;
+			sourceTree = "<group>";
+		};
+		F5F68AF120A3358D00E7CA0D /* views */ = {
+			isa = PBXGroup;
+			children = (
+				F5F68AEF20A3358900E7CA0D /* ActivityTableViewCell.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,7 +522,12 @@
 			files = (
 				F54A08CA20A2DA0500831EB1 /* SecondTrackerViewController.swift in Sources */,
 				F51A940920A0605F00F75D8A /* AppDelegate.swift in Sources */,
+				F5F68AF020A3358900E7CA0D /* ActivityTableViewCell.swift in Sources */,
 				F54A08C820A2D9F600831EB1 /* FirstTrackerViewController.swift in Sources */,
+				F54A094720A32EC000831EB1 /* RunningStairs.xcdatamodeld in Sources */,
+				F5F68AEC20A3338300E7CA0D /* Activity+CoreDataProperties.swift in Sources */,
+				F5F68AEE20A334EF00E7CA0D /* HistoryTableViewController.swift in Sources */,
+				F5F68AEB20A3338300E7CA0D /* Activity+CoreDataClass.swift in Sources */,
 				F54A08C520A2D8B700831EB1 /* TabBarViewController.swift in Sources */,
 				F51A943920A1AA5900F75D8A /* Helpers.swift in Sources */,
 			);
@@ -801,6 +837,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F54A094520A32EC000831EB1 /* RunningStairs.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F54A094620A32EC000831EB1 /* RunningStairs.xcdatamodel */,
+			);
+			currentVersion = F54A094620A32EC000831EB1 /* RunningStairs.xcdatamodel */;
+			path = RunningStairs.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F51A93FD20A0605F00F75D8A /* Project object */;
 }

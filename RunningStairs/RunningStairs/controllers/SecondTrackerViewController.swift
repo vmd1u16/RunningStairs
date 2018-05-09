@@ -8,6 +8,7 @@
 
 import UIKit
 import MotionDetector
+import CoreData
 
 class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
 
@@ -21,11 +22,9 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
     @IBOutlet weak var timeLabel: UILabel!
     
     var seconds = 0
-    var minutes = 0
-    var hours = 0
     var timer = Timer()
-    var isTimerRunning = false //This will be used to make sure only one timer is created at a time.
     
+    var managedObjectContext:NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var delegate : ActivityChangedProtocol!
     
@@ -34,9 +33,12 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
     var canChangeDirection = true
     var userWasRunning = false
     
+    var floors = 0
     var previousAltitude : Double!
     var currentAltitude : Double!
-    var averagePace : Double!
+    var averagePace = 0.0
+    var startDate : NSDate!
+    var endDate : NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,19 +47,94 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        startDate = NSDate()
+        setupInitialViews()
+        
         motionDetector.runningStairsDelegate = self
         motionDetector.startRunningStairsActivity()
+        
         self.runTimer()
     }
     
     @IBAction func stopBtnPressed(_ sender: Any) {
         
-        motionDetector.stopRunningStairsActivity()
-        timer.invalidate()
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        // show alert with adding activity to history / or not
-        delegate.updateActivityView(index: 0)
+            actionSheet.addAction(UIAlertAction(title: "Save Activity", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.saveActivity()
+            }))
+        
+        
+        actionSheet.addAction(UIAlertAction(title: "Resume", style: .default, handler: { (action: UIAlertAction!) in
+            
+                // nothing to be done
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Restart", style: .destructive, handler: { (action: UIAlertAction!) in
+            self.restartActivity()
+            
+        }))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
     }
+    
+    func saveActivity() {
+        
+        guard userWasRunning == true else {
+            
+            showCustomAlert(title: "Activity cannot be saved.", message: "You were not running during this activity!", vc: self)
+        
+            return
+        }
+        
+        self.endDate = NSDate()
+        
+        let activity = Activity(context: managedObjectContext)
+        activity.startDate = self.startDate
+        activity.endDate = self.endDate
+        activity.pace = self.averagePace
+        activity.duration = Int64(self.seconds)
+        activity.floors = Int64(self.floors)
+        
+        
+        // try to save activity to db
+        do {
+            try self.managedObjectContext.save()
+        }
+        catch {
+            print ("Could not save data \(error.localizedDescription)")
+        }
+        
+        showCustomAlert(title: "Activity was saved.", message: "", vc: self)
+        
+        self.restartActivity()
+    }
+    
+    func restartActivity() {
+        
+        setupInitialViews()
+        self.motionDetector.stopRunningStairsActivity()
+        self.self.timer.invalidate()
+        
+        self.delegate.updateActivityView(index: 0)
+        
+    }
+    
+    func setupInitialViews() {
+        
+        directionButton.setImage(nil, for: .normal)
+        
+        floorsButton.setTitle("0", for: .normal)
+        
+        paceLabel.text = "--:--"
+        self.seconds = 0
+        timeLabel.text = "00:00:00"
+    }
+    
     
     // MARK -- RunningStairsProtocol methods
     
@@ -97,7 +174,7 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
             if canChangeDirection {
                 canChangeDirection = false
                 self.previousAltitude = altitude
-                runCode(in: 5.0) {
+                runCode(in: 3.0) {
                     
                     self.setupDirection()
                     
@@ -109,12 +186,13 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
     
     func updateFloors(floors:Int) {
         self.floorsButton.setTitle("\(floors)", for: .normal)
+        self.floors = floors
     }
     
     func setupDirection() {
         
         // direction is down
-        if self.previousAltitude > self.currentAltitude + 0.5 {
+        if self.previousAltitude > self.currentAltitude + 0.35 {
             
             let imageDown = UIImage(named: "direction_down")
             directionButton.setImage(imageDown, for: .normal)
@@ -122,7 +200,7 @@ class SecondTrackerViewController: UIViewController, RunningStairsProtocol {
         }
             
             // direction is up
-        else if self.previousAltitude < self.currentAltitude - 0.5 {
+        else if self.previousAltitude < self.currentAltitude - 0.35 {
             let imageDown = UIImage(named: "direction_up")
             directionButton.setImage(imageDown, for: .normal)
         }

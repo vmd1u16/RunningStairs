@@ -17,22 +17,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="TZd-zp-zXT">
-            <objects>
-                <viewController id="8jm-9M-YFj" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="o2c-hu-Leb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="LpX-p9-qJu"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="KOA-f2-4jM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bld-IU-0EA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1905" y="-459"/>
-        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="LsI-j7-eLL">
             <objects>
@@ -208,6 +192,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.9137254901960784" green="0.29019607843137252" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.91372549020000005" green="0.2901960784" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Xdd-u9-5VZ" kind="relationship" relationship="viewControllers" id="rCS-dY-tnd"/>
@@ -260,6 +246,7 @@
                             <constraint firstItem="poO-hZ-OmN" firstAttribute="centerX" secondItem="lzs-em-oyz" secondAttribute="centerX" id="tfu-pM-cqe"/>
                             <constraint firstAttribute="bottom" secondItem="poO-hZ-OmN" secondAttribute="bottom" constant="25" id="x8t-v1-RiF"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="v1M-HQ-Icr"/>
                     </view>
                     <size key="freeformSize" width="375" height="554"/>
                 </viewController>
@@ -271,7 +258,7 @@
         <scene sceneID="0XS-jB-h1s">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xdd-u9-5VZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Track activity" id="Fi6-c3-qTM"/>
+                    <tabBarItem key="tabBarItem" title="Track activity" image="track" selectedImage="trackActive" id="Fi6-c3-qTM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aeq-67-52o">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -290,7 +277,7 @@
         <scene sceneID="aWu-5M-T6O">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WwR-9d-CBb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity history" id="fdy-7U-4QH"/>
+                    <tabBarItem key="tabBarItem" title="Activity history" image="historyGrey" selectedImage="historyIcon" id="fdy-7U-4QH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XFM-i8-Rtv">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -298,18 +285,51 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8jm-9M-YFj" kind="relationship" relationship="rootViewController" id="brc-8c-wu9"/>
+                        <segue destination="DoW-yI-iRY" kind="relationship" relationship="rootViewController" id="Vix-aO-hGG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMK-Rb-INW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1022" y="-459"/>
         </scene>
+        <!--History Table View Controller-->
+        <scene sceneID="wng-th-Vmw">
+            <objects>
+                <tableViewController id="DoW-yI-iRY" customClass="HistoryTableViewController" customModule="RunningStairs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jLZ-tP-4ro">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityCell" id="cgd-ZA-pCL" customClass="ActivityTableViewCell" customModule="RunningStairs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgd-ZA-pCL" id="x0d-ai-bM9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="DoW-yI-iRY" id="z4b-JC-rxT"/>
+                            <outlet property="delegate" destination="DoW-yI-iRY" id="hKR-JM-3Re"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="toM-s1-TPv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QI3-IK-gdl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1956" y="-459"/>
+        </scene>
     </scenes>
     <resources>
         <image name="active" width="1024" height="1024"/>
         <image name="button-start" width="2841" height="1001"/>
         <image name="button-stop" width="2841" height="1001"/>
+        <image name="historyGrey" width="23" height="23"/>
+        <image name="historyIcon" width="23" height="23"/>
         <image name="notActive" width="1024" height="1024"/>
+        <image name="track" width="23" height="23"/>
+        <image name="trackActive" width="23" height="23"/>
     </resources>
 </document>
